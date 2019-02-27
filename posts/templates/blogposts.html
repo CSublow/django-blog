@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <!-- This is for a list of blog posts, not the posts themselves -->
+    {% for post in posts %}
+    <div class="row">
+        <div class="col-md-2 col-sm-3 text-center">
+            <a class="story-img" href="#">
+                <img src="/media/img/profile.jpg" class="img-circle">
+            </a>
+            <!-- Since you're not storing an author name on the backend, just add a hardcoded author name -->
+            <p><span class="boldtext">Author:</span> Chris</p>
+        </div>
+        <div class="col-md-12 col-sm-9">
+            <h3>{{ post.title }}</h3>
+            <div class="row">
+                <div class="col-xs-9">
+                    <!-- Filter the post.content with the | symbol, in this case truncate the post content to 30 words -->
+                    <p>{{ post.content|truncatewords:30 }}</p>
+                    <!-- Read More links to the post detail which will give the full post -->
+                    <p><a href="{% url 'post_detail' post.id %}" class="btn btn-default">Read More</a></p>
+                    <p><span class="boldtext">Published on: </span>{{ post.published_date }}</p>
+                    <p><span class="boldtext">Views: </span>{{ post.views }}</p>
+                    <p><span class="boldtext">Tag: </span>{{ post.tag }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+{% endblock %}
